@@ -1,0 +1,35 @@
+.result-information {
+  background: $twitch-purple;
+  color: $white;
+  display: flex;
+  font-size: 1rem;
+  justify-content: space-between;
+
+  .totals {
+    margin: 1.5rem 2.5rem;
+  }
+
+  nav {
+    margin: 1.5rem 2.5rem;
+  }
+
+  button {
+    background: none;
+    border: 0;
+    cursor: pointer;
+    margin: 0 .25rem;
+    padding: 0;
+
+    img {
+      height: 1rem;
+      margin-bottom: .25rem;
+      vertical-align: middle;
+    }
+  }
+
+  button:last-of-type {
+    img {
+      transform: rotate(180deg);
+    }
+  }
+}
