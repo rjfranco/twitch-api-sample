@@ -374,6 +374,15 @@ header {
     header button:hover {
       background: #654b97; }
 
+.message {
+  background: #f6f6f6;
+  border-radius: .25rem;
+  color: #555;
+  font-size: 2.5rem;
+  margin: 2.5rem;
+  padding: 2.5rem;
+  text-align: center; }
+
 .results {
   list-style-type: none;
   padding: 0; }
