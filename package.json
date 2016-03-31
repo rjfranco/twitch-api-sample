@@ -1,0 +1,30 @@
+{
+  "name": "twitch-api-sample",
+  "version": "0.0.1",
+  "description": "Sample of how to access and use the twitch api",
+  "main": "app/index.js",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rjfranco/twitch-api-sample.git"
+  },
+  "keywords": [
+    "twitch",
+    "api",
+    "sample"
+  ],
+  "author": "Ramiro Jr. Franco",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rjfranco/twitch-api-sample/issues"
+  },
+  "homepage": "https://github.com/rjfranco/twitch-api-sample#readme",
+  "devDependencies": {
+    "browser-sync": "^2.11.2",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-ruby-sass": "^2.0.6"
+  }
+}
