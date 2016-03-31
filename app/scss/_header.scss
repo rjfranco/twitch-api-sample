@@ -21,4 +21,18 @@ header {
     font-size: 1.5rem;
     padding: 1rem;
   }
+
+  button {
+    background: $twitch-purple;
+    border: 0;
+    color: $white;
+    cursor: pointer;
+    font-size: 1.5rem;
+    padding: 0;
+    width: 9rem;
+
+    &:hover {
+      background: mix($white, $twitch-purple, 10%);
+    }
+  }
 }
