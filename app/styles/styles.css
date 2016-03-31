@@ -436,6 +436,6 @@ header {
       height: 1rem;
       margin-bottom: .25rem;
       vertical-align: middle; }
-  .result-information button:last-of-type img {
+  .result-information [alt="right"] {
     -webkit-transform: rotate(180deg);
             transform: rotate(180deg); }

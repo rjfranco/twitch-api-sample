@@ -27,9 +27,7 @@
     }
   }
 
-  button:last-of-type {
-    img {
-      transform: rotate(180deg);
-    }
+  [alt="right"] {
+    transform: rotate(180deg);
   }
 }
