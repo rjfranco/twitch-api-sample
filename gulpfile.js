@@ -1,11 +1,16 @@
+// requires
+var autoprefixer = require('gulp-autoprefixer');
+var browserSync = require('browser-sync');
 var gulp = require('gulp');
 var sass = require('gulp-ruby-sass');
-var browserSync = require('browser-sync');
+
+// global
 var reload = browserSync.reload;
 
 // Process SCSS
 gulp.task('sass', function() {
   return sass('app/scss/styles.scss')
+    .pipe(autoprefixer())
     .pipe(gulp.dest('app/styles'))
     .pipe(reload({ stream: true }));
 });
