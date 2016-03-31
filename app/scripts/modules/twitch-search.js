@@ -76,7 +76,7 @@ export default class {
   }
 
   arrowString(direction) {
-    return `<button><img src="img/arrow.svg" alt="${direction}" /></button>`;
+    return `<button><img src="img/arrow.svg" alt="${direction}" class="pagination-arrow-${direction}"/></button>`;
   }
 
   leftArrow() {
@@ -98,6 +98,32 @@ export default class {
     result_information.innerHTML = `${totals}${pagination}`;
 
     insertAfter(this.header, result_information);
+    this.bindPaginationEvents();
+  }
+
+  bindPaginationEvents() {
+    if (!this.isFirstPage()) {
+      this.bindArrow('left');
+    }
+
+    if (!this.isLastPage()) {
+      this.bindArrow('right');
+    }
+  }
+
+  bindArrow(direction) {
+    let arrow = document.getElementsByClassName(`pagination-arrow-${direction}`)[0];
+    arrow.addEventListener('click', (event) => {
+      if (direction === 'left') {
+        this.current_page -= 1;
+      } else {
+        this.current_page += 1;
+      }
+
+      request(this.current_query, this.current_page).then(function(data) {
+        this.updateQueryData(data, this.current_page);
+      }.bind(this));
+    });
   }
 
   updateResults() {

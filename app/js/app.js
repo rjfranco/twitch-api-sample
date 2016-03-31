@@ -31,11 +31,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-exports.default = function (query) {
+exports.default = function (query, page) {
   return new Promise(function (resolve, reject) {
     var xhr = new XMLHttpRequest();
     var url = 'https://api.twitch.tv/kraken/search/streams';
     var request_url = url + '?limit=10&q=' + query;
+
+    if (page) {
+      request_url += '&offset=' + (page - 1) * 10;
+    }
 
     xhr.open('get', request_url);
 
@@ -169,7 +173,7 @@ var _class = function () {
   }, {
     key: 'arrowString',
     value: function arrowString(direction) {
-      return '<button><img src="img/arrow.svg" alt="' + direction + '" /></button>';
+      return '<button><img src="img/arrow.svg" alt="' + direction + '" class="pagination-arrow-' + direction + '"/></button>';
     }
   }, {
     key: 'leftArrow',
@@ -194,6 +198,36 @@ var _class = function () {
       result_information.innerHTML = '' + totals + pagination;
 
       (0, _insertAfter2.default)(this.header, result_information);
+      this.bindPaginationEvents();
+    }
+  }, {
+    key: 'bindPaginationEvents',
+    value: function bindPaginationEvents() {
+      if (!this.isFirstPage()) {
+        this.bindArrow('left');
+      }
+
+      if (!this.isLastPage()) {
+        this.bindArrow('right');
+      }
+    }
+  }, {
+    key: 'bindArrow',
+    value: function bindArrow(direction) {
+      var _this = this;
+
+      var arrow = document.getElementsByClassName('pagination-arrow-' + direction)[0];
+      arrow.addEventListener('click', function (event) {
+        if (direction === 'left') {
+          _this.current_page -= 1;
+        } else {
+          _this.current_page += 1;
+        }
+
+        (0, _request2.default)(_this.current_query, _this.current_page).then(function (data) {
+          this.updateQueryData(data, this.current_page);
+        }.bind(_this));
+      });
     }
   }, {
     key: 'updateResults',
