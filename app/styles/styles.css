@@ -374,6 +374,16 @@ header {
     header button:hover {
       background: #654b97; }
 
+.results {
+  list-style-type: none;
+  padding: 0; }
+  .results h2 {
+    margin: 2rem 2.5rem 0; }
+  .results h3 {
+    margin: 0 2.5rem; }
+  .results p {
+    margin: 0 2.5rem 2rem; }
+
 .result-information {
   background: #54378b;
   color: #fff;
