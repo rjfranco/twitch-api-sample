@@ -35,7 +35,7 @@ exports.default = function (query) {
   return new Promise(function (resolve, reject) {
     var xhr = new XMLHttpRequest();
     var url = 'https://api.twitch.tv/kraken/search/streams';
-    var request_url = url + '?q=' + query;
+    var request_url = url + '?limit=10&q=' + query;
 
     xhr.open('get', request_url);
 
@@ -98,6 +98,7 @@ var _class = function () {
     value: function clearContent() {
       this.clearElementsWithClass('message');
       this.clearElementsWithClass('results');
+      this.clearElementsWithClass('result-information');
     }
   }, {
     key: 'clearElementsWithClass',
@@ -144,6 +145,7 @@ var _class = function () {
 
       this.total_available = data._total;
       this.current_page = current_page || 1;
+      this.current_results = data.streams;
 
       this.clearContent();
       this.updateResultInformation();
@@ -152,7 +154,7 @@ var _class = function () {
   }, {
     key: 'totalPages',
     value: function totalPages() {
-      return Math.floor(this.total_available / 10);
+      return Math.ceil(this.total_available / 10);
     }
   }, {
     key: 'isFirstPage',
@@ -167,7 +169,6 @@ var _class = function () {
   }, {
     key: 'arrowString',
     value: function arrowString(direction) {
-      console.log('theeennn....');
       return '<button><img src="img/arrow.svg" alt="' + direction + '" /></button>';
     }
   }, {
@@ -190,8 +191,6 @@ var _class = function () {
 
       var pagination = '<nav>' + this.leftArrow() + '<span class="current-page">' + this.current_page + '/' + this.totalPages() + '</span>' + this.rightArrow() + '</nav>';
 
-      console.log(pagination, 'making it?');
-
       result_information.innerHTML = '' + totals + pagination;
 
       (0, _insertAfter2.default)(this.header, result_information);
@@ -199,7 +198,20 @@ var _class = function () {
   }, {
     key: 'updateResults',
     value: function updateResults() {
-      console.log('I should be showing results.');
+      var results = document.createElement('ul');
+      results.classList.add('results');
+
+      this.current_results.forEach(function (result) {
+        var new_result = document.createElement('li');
+
+        var new_result_content = '\n      <img src="' + result.preview.large + '" class="stream-preview" />\n      <div class="stream-description">\n        <h2>' + result.channel.name + '</h2>\n        <h3><strong>' + result.game + '</strong> - ' + result.viewers + ' viewers</h3>\n        <p>' + result.channel.status + '</p>\n      </div>';
+
+        new_result.innerHTML = new_result_content;
+
+        results.appendChild(new_result);
+      });
+
+      (0, _insertAfter2.default)(this.header.nextSibling, results);
     }
   }]);
 

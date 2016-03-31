@@ -362,6 +362,7 @@ header {
         -ms-flex: 1;
             flex: 1;
     font-size: 1.5rem;
+    outline: none;
     padding: 1rem; }
   header button {
     background: #54378b;
@@ -406,7 +407,10 @@ header {
   .results h2 {
     margin: 2rem 2.5rem 0; }
   .results h3 {
+    font-weight: 300;
     margin: 0 2.5rem .75rem; }
+    .results h3 strong {
+      font-weight: 600; }
   .results p {
     margin: 0 2.5rem 2rem; }
 

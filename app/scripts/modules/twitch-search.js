@@ -13,6 +13,7 @@ export default class {
   clearContent() {
     this.clearElementsWithClass('message');
     this.clearElementsWithClass('results');
+    this.clearElementsWithClass('result-information');
   }
 
   clearElementsWithClass(element_class) {
@@ -55,6 +56,7 @@ export default class {
 
     this.total_available = data._total;
     this.current_page = current_page || 1;
+    this.current_results = data.streams;
 
     this.clearContent();
     this.updateResultInformation();
@@ -62,7 +64,7 @@ export default class {
   }
 
   totalPages() {
-    return Math.floor(this.total_available / 10);
+    return Math.ceil(this.total_available / 10);
   }
 
   isFirstPage() {
@@ -74,7 +76,6 @@ export default class {
   }
 
   arrowString(direction) {
-    console.log('theeennn....');
     return `<button><img src="img/arrow.svg" alt="${direction}" /></button>`;
   }
 
@@ -94,14 +95,31 @@ export default class {
 
     let pagination = `<nav>${this.leftArrow()}<span class="current-page">${this.current_page}/${this.totalPages()}</span>${this.rightArrow()}</nav>`;
 
-    console.log(pagination, 'making it?');
-
     result_information.innerHTML = `${totals}${pagination}`;
 
     insertAfter(this.header, result_information);
   }
 
   updateResults() {
-    console.log('I should be showing results.');
+    let results = document.createElement('ul');
+    results.classList.add('results');
+
+    this.current_results.forEach(function(result) {
+      let new_result = document.createElement('li');
+
+      let new_result_content = `
+      <img src="${result.preview.large}" class="stream-preview" />
+      <div class="stream-description">
+        <h2>${result.channel.name}</h2>
+        <h3><strong>${result.game}</strong> - ${result.viewers} viewers</h3>
+        <p>${result.channel.status}</p>
+      </div>`;
+
+      new_result.innerHTML = new_result_content;
+
+      results.appendChild(new_result);
+    });
+
+    insertAfter(this.header.nextSibling, results);
   }
 }

@@ -2,7 +2,7 @@ export default function(query) {
   return new Promise(function(resolve, reject) {
     let xhr = new XMLHttpRequest();
     let url = 'https://api.twitch.tv/kraken/search/streams';
-    let request_url = url + '?q='+ query;
+    let request_url = url + '?limit=10&q='+ query;
 
     xhr.open('get', request_url);
 
