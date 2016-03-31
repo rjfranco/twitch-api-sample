@@ -1,3 +1,5 @@
 import request from './modules/request';
 
-request('/the-internet.json', 'get')
+request('https://api.twitch.tv/kraken/search/streams?q=starcraft', 'get').then(function(data) {
+  console.log(data);
+});

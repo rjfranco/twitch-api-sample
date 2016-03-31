@@ -377,10 +377,25 @@ header {
 .results {
   list-style-type: none;
   padding: 0; }
+  .results li {
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex; }
+    .results li:nth-child(even) {
+      background: #f6f5f9; }
+  .results img {
+    height: 180px;
+    margin: 1.75rem 0 1.75rem 2.5rem;
+    width: 320px; }
   .results h2 {
     margin: 2rem 2.5rem 0; }
   .results h3 {
-    margin: 0 2.5rem; }
+    margin: 0 2.5rem .75rem; }
   .results p {
     margin: 0 2.5rem 2rem; }
 

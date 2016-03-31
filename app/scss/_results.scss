@@ -2,12 +2,27 @@
   list-style-type: none;
   padding: 0;
 
+  li {
+    align-items: center;
+    display: flex;
+
+    &:nth-child(even) {
+      background: mix($twitch-purple, $white, 5%);
+    }
+  }
+
+  img {
+    height: 180px;
+    margin: 1.75rem 0 1.75rem 2.5rem;
+    width: 320px;
+  }
+
   h2 {
     margin: 2rem 2.5rem 0;
   }
 
   h3 {
-    margin: 0 2.5rem;
+    margin: 0 2.5rem .75rem;
   }
 
   p {

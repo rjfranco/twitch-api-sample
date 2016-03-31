@@ -7,7 +7,9 @@ var _request2 = _interopRequireDefault(_request);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-(0, _request2.default)('/the-internet.json', 'get');
+(0, _request2.default)('https://api.twitch.tv/kraken/search/streams?q=starcraft', 'get').then(function (data) {
+  console.log(data);
+});
 
 },{"./modules/request":2}],2:[function(require,module,exports){
 "use strict";
