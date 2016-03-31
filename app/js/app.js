@@ -16,10 +16,15 @@ var input = document.getElementsByName('search-query')[0];
 var header = document.getElementsByTagName('header')[0];
 
 function clearContent() {
-  var messages = document.getElementsByClassName('message');
+  clearElementsWithClass('messages');
+  clearElementsWithClass('results');
+}
 
-  for (var i = 0; i < messages.length; i++) {
-    messages[i].remove();
+function clearElementsWithClass(element_class) {
+  var elements = document.getElementsByClassName(element_class);
+
+  for (var i = 0; i < elements.length; i++) {
+    elements[i].remove();
   }
 }
 
