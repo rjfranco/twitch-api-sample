@@ -382,6 +382,8 @@ header {
   margin: 2.5rem;
   padding: 2.5rem;
   text-align: center; }
+  .message.error {
+    background: #fff2f2; }
 
 .results {
   list-style-type: none;

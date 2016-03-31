@@ -7,22 +7,57 @@ var _request2 = _interopRequireDefault(_request);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-(0, _request2.default)('https://api.twitch.tv/kraken/search/streams?q=starcraft', 'get').then(function (data) {
-  console.log(data);
-});
+// request('https://api.twitch.tv/kraken/search/streams?q=starcraft', 'get').then(function(data) {
+//   console.log(data);
+// });
+
+var form = document.getElementsByTagName('form')[0];
+var input = document.getElementsByName('search-query')[0];
+var header = document.getElementsByTagName('header')[0];
+
+function clearContent() {
+  var messages = document.getElementsByClassName('message');
+
+  for (var i = 0; i < messages.length; i++) {
+    messages[i].remove();
+  }
+}
+
+function displayErrorMessage(message) {
+  clearContent();
+  var error_message = document.createElement('p');
+  error_message.classList.add('message');
+  error_message.classList.add('error');
+  error_message.innerText = message;
+  header.parentNode.insertBefore(error_message, header.nextSibling);
+}
+
+function searchQuery(event) {
+  event.preventDefault();
+
+  if (!!input.value) {
+    (0, _request2.default)(input.value);
+  } else {
+    displayErrorMessage('Please enter at least one character to search.');
+  }
+}
+
+form.addEventListener('submit', searchQuery);
 
 },{"./modules/request":2}],2:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = request;
-function request(url, method) {
+function request(query) {
   return new Promise(function (resolve, reject) {
     var xhr = new XMLHttpRequest();
+    var url = 'https://api.twitch.tv/kraken/search/streams';
+    var query = url + '?q=' + query;
 
-    xhr.open(method, url);
+    xhr.open('get', query);
 
     xhr.onload = function () {
       if (this.status == 200) {

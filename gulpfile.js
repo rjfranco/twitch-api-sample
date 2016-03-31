@@ -16,6 +16,12 @@ var source = require('vinyl-source-stream');
 // global
 var reload = browserSync.reload;
 
+// Copy polyfill
+gulp.task('copyPolyfill', function() {
+  return gulp.src('node_modules/babel-polyfill/dist/polyfill.min.js')
+    .pipe(gulp.dest('app/js'));
+});
+
 // Process SCSS
 gulp.task('sass', function() {
   return sass('app/scss/styles.scss')
@@ -40,7 +46,7 @@ gulp.task('bundler', function() {
 });
 
 // watch files for changes and reload
-gulp.task('serve', ['sass', 'bundler'], function() {
+gulp.task('serve', ['copyPolyfill', 'sass', 'bundler'], function() {
   browserSync({
     server: {
       baseDir: 'app'
